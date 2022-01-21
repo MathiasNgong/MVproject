@@ -1,0 +1,89 @@
+<!DOCTYPE html> 
+<html> 
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title> Login Page </title>
+<style> 
+body {
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 0 20px;
+}
+button { 
+       background-color: #98e3ec; 
+       width: 100%;
+        color: rgb(65, 55, 25); 
+        padding: 15px; 
+        margin: 10px 0px; 
+        border: none; 
+        cursor: pointer; 
+         } 
+ form { 
+        border: 3px solid #f7f4f4; 
+    } 
+ input[type=text], input[type=password] { 
+        width: 100%; 
+        margin: 8px 0;
+        padding: 12px 20px; 
+        display: inline-block; 
+        border: 2px solid rgb(42, 16, 83); 
+        box-sizing: border-box; 
+    }
+ button:hover { 
+        opacity: 0.7; 
+    } 
+    .container {
+  border: 2px solid #dedede;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+
+      
+   
+ 
+</style> 
+</head>  
+<body>  
+    <center> <h1> Login Page </h1> </center> 
+    <form>
+        <div class="container"> 
+            <label>Username : </label> 
+            <input type="text" id = "userid"placeholder="Type your Username here" name="username" required>
+            <label>Password : </label> 
+            <input type="password" id = "passwid" placeholder="Type your Password here" name="password" required>
+            <button type="LOGIN" id="loginButton">Login</button> 
+             Need to create an account? <a href="/auth/signUp"> Sign Up </a> 
+            to Chat <a href="/chat/"> Login </a> 
+        </div> 
+    </form> 
+    
+    <script>
+        document.getElementById("loginButton")
+        .addEventListener("click", function(event){
+            event.preventDefault();
+            console.log("Log In Clicked");
+            var login_username = document.getElementById("userid")
+            .value;
+            var login_password = document.getElementById("passwid")
+            .value;
+            console.log(" the user name :"+login_username+" The password : "+ login_password);
+
+
+            fetch('/auth/login', {
+                method: 'POST',
+                body: JSON.stringify({
+                    username: login_username,
+                    password: login_password
+                    })
+                })
+                .then(function(response) {
+                    console.log(response)
+                });
+
+        });
+    </script>
+</body>   
+</html>
